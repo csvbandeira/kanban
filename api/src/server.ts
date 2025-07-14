@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", async (req, res) => {
-	console.log("Funcionou!");
+	res.send("teste");
 });
 
 app.listen(port, () => console.log("http://localhost:%d", port));
