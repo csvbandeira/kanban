@@ -1,24 +1,27 @@
 {
-  "name": "api",
-  "version": "0.0.1",
-  "description": "",
-  "main": "./src/server.ts",
-  "scripts": {
-    "dev": "tsx watch src/server.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.13.1",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "typeorm": "^0.3.25"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
-  }
+	"name": "api",
+	"version": "0.0.0",
+	"description": "",
+	"main": "src/app.ts",
+	"scripts": {
+		"dev": "tsx watch src/app.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.13.1",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.0",
+		"express": "^5.1.0",
+		"mysql": "^2.18.1",
+		"reflect-metadata": "^0.2.2",
+		"typeorm": "^0.3.25"
+	},
+	"devDependencies": {
+		"@types/cors": "^2.8.19",
+		"@types/express": "^5.0.3",
+		"tsx": "^4.20.3",
+		"typescript": "^5.8.3"
+	}
 }
