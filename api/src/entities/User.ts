@@ -5,7 +5,7 @@ class User {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
-	@Column("varchar")
+	@Column()
 	name!: string;
 }
 
