@@ -15,7 +15,11 @@ const databaseConfig = new DataSource({
 });
 
 const initializeConnection = async () => {
-	if (!databaseConfig.isInitialized) await databaseConfig.initialize();
+	try {
+		if (!databaseConfig.isInitialized) await databaseConfig.initialize();
+	} catch (err) {
+		console.error("Database connection failed! ", err);
+	}
 };
 
 export { initializeConnection, databaseConfig as db };

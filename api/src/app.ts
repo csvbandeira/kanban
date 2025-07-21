@@ -7,6 +7,8 @@ import cors from "cors";
 import { initializeConnection, db } from "./database/connect";
 import User from "./entities/User";
 
+import * as user from "./controllers/user";
+
 const app = express();
 const port = 3000;
 
@@ -17,81 +19,10 @@ const startServer = async () => {
 		app.use(express.json());
 		app.use(cors());
 
-		app.post("/user", async (req: Request, res: Response) => {
-			try {
-				const { name } = req.body;
-
-				if (!name) {
-					console.log("Teste");
-					return res.status(400).json({
-						message:
-							"Erro ao criar usuário! Verifique se todos os campos obrigatórios foram preenchidos corretamente.",
-					});
-				}
-
-				const user = db.getRepository(User).create({ name });
-				await db.getRepository(User).save(user);
-
-				return res.status(201).json({
-					message: "Usuário criado com sucesso!",
-					user,
-				});
-			} catch (err) {
-				console.error(err);
-				return;
-			}
-		});
-
-		app.patch("/user/:id", async (req: Request, res: Response) => {
-			try {
-				const { id } = req.params;
-				const { name } = req.body;
-
-				if (!name) {
-					console.log("Teste");
-					return res.status(400).json({
-						message:
-							"Erro ao editar usuário! Verifique se todos os campos obrigatórios foram preenchidos corretamente.",
-					});
-				}
-
-				await db.getRepository(User).update(Number(id), { name: name });
-
-				return res
-					.status(204)
-					.json({ message: "Usuário editado com sucesso!" });
-			} catch (err) {
-				console.error(err);
-				return;
-			}
-		});
-
-		app.delete("/user/:id", async (req: Request, res: Response) => {
-			try {
-				const { id } = req.params;
-
-				if (!id) {
-					return res.status(400).json({
-						message:
-							"Erro ao excluir usuário! Verifique se os parâmetros são válidos!",
-					});
-				}
-
-				await db.getRepository(User).delete(Number(id));
-
-				return res
-					.status(204)
-					.json({ message: "Usuário excluído com sucesso!" });
-			} catch (err) {
-				console.error(err);
-				return;
-			}
-		});
-
-		app.get("/user", async (req: Request, res: Response) => {
-			const users = await db.getRepository(User).find();
-			return res.status(200).json(users);
-		});
+		app.post("/user", user.create);
+		app.patch("/user/:id", user.update);
+		app.delete("/user/:id", user.exclude);
+		app.get("/user", user.list);
 
 		app.listen(port, () =>
 			console.log("Running at endpoint http://localhost:%d", port)
