@@ -4,7 +4,10 @@
 	"description": "",
 	"main": "src/app.ts",
 	"scripts": {
-		"dev": "ts-node src/app.ts"
+		"dev": "ts-node src/app.ts",
+		"lint": "eslint . --ext .ts,.tsx",
+		"type-check": "tsc --noEmit",
+		"prettier:write": "prettier --write ."
 	},
 	"keywords": [],
 	"author": "",

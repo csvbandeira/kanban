@@ -2,11 +2,13 @@
 	"name": "kanban",
 	"version": "0.0.0",
 	"description": "",
-	"scripts": {
-		"install-dependecies": "cd api && pnpm i && cd ../client && pnpm i"
-	},
+	"scripts": {},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"packageManager": "pnpm@10.13.1"
+	"packageManager": "pnpm@10.13.1",
+	"devDependencies": {
+		"eslint": "^9.31.0",
+		"prettier": "^3.6.2"
+	}
 }
