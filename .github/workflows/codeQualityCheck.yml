@@ -20,7 +20,7 @@ jobs:
           version: 10
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: API's code quality check
         run: pnpm --filter ./api lint
