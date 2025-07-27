@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import User from "../entities/User";
-import { db } from "../database/connect";
+import User from '../entities/User';
+import { db } from '../database/connect';
 
 export const create = async (req: Request, res: Response) => {
 	try {
@@ -9,7 +9,7 @@ export const create = async (req: Request, res: Response) => {
 
 		if (!name) {
 			return res.status(400).json({
-				message: "Failed to create user! Check values sent",
+				message: 'Failed to create user! Check values sent',
 			});
 		}
 
@@ -17,13 +17,13 @@ export const create = async (req: Request, res: Response) => {
 		await db.getRepository(User).save(user);
 
 		return res.status(201).json({
-			message: "User has been created successfully!",
+			message: 'User has been created successfully!',
 			user,
 		});
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: "Failed to create user! Check console for details",
+			message: 'Failed to create user! Check console for details',
 		});
 	}
 };
@@ -35,13 +35,13 @@ export const update = async (req: Request, res: Response) => {
 
 		if (!id) {
 			return res.status(400).json({
-				message: "Failed to edit user! Check parameters sent",
+				message: 'Failed to edit user! Check parameters sent',
 			});
 		}
 
 		if (!name) {
 			return res.status(400).json({
-				message: "Failed to edit user! Check values sent",
+				message: 'Failed to edit user! Check values sent',
 			});
 		}
 
@@ -49,11 +49,11 @@ export const update = async (req: Request, res: Response) => {
 
 		return res
 			.status(204)
-			.json({ message: "User has been edited succesfully!" });
+			.json({ message: 'User has been edited succesfully!' });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: "Failed to edit user! Check console for details",
+			message: 'Failed to edit user! Check console for details',
 		});
 	}
 };
@@ -64,7 +64,7 @@ export const exclude = async (req: Request, res: Response) => {
 
 		if (!id) {
 			return res.status(400).json({
-				message: "Failed to delete user! Check parameters sent",
+				message: 'Failed to delete user! Check parameters sent',
 			});
 		}
 
@@ -72,11 +72,11 @@ export const exclude = async (req: Request, res: Response) => {
 
 		return res
 			.status(204)
-			.json({ message: "User has been deleted successfully!" });
+			.json({ message: 'User has been deleted successfully!' });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: "Failed to delete user! Check console for details",
+			message: 'Failed to delete user! Check console for details',
 		});
 	}
 };

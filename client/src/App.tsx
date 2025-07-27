@@ -1,9 +1,7 @@
+import AppRoutes from './AppRoutes';
+
 const App = () => {
-	return (
-		<>
-			<div className="h-screen w-full bg-gray-800 text-blue-500">App</div>
-		</>
-	);
+	return <AppRoutes />;
 };
 
 export default App;
