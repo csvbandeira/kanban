@@ -18,6 +18,8 @@ const startServer = async () => {
 		app.use(express.json());
 		app.use(cors());
 
+		app.post('/authentication', user.authentication);
+
 		app.post('/user', user.create);
 		app.patch('/user/:id', user.update);
 		app.delete('/user/:id', user.exclude);

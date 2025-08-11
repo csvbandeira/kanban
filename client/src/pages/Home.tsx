@@ -1,5 +1,7 @@
-const Home = () => {
-	return <div>Home</div>;
+type HomeProps = {};
+
+const Home = ({}: HomeProps) => {
+	return <div className="bg-green-600 h-screen w-full">teste</div>;
 };
 
 export default Home;
