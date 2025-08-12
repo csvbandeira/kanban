@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -45,16 +45,16 @@ const Form = () => {
 	};
 
 	return (
-		<form className="h-3/4 w-1/2 border-2" id="myForm" ref={formRef}>
-			<header className="h-1/5 w-full flex justify-center items-center p-4 hover:bg-green-400">
-				<span className="text-2xl text-yellow-500 font-extrabold">LOGIN</span>
+		<form ref={formRef} className="h-3/4 w-1/2 bg-white rounded-4xl">
+			<header className="h-1/5 w-full flex justify-center items-end p-">
+				<span className="text-4xl text-purple-700 font-extrabold">LOGIN</span>
 			</header>
 			<main className="h-3/5 w-full flex flex-col justify-evenly items-center py-4 px-12">
 				<label
-					className="h-2/10 w-full flex flex-col hover:bg-amber-300"
+					className="h-2/10 w-full flex flex-col p-2 transition-all rounded-2xl hover:bg-gray-50"
 					htmlFor="name"
 				>
-					<span>Name</span>
+					<span className="text-lg text-black font-semibold">Name</span>
 					<input
 						className="w-full h-full px-1 border-b-1 outline-none"
 						id="name"
@@ -64,10 +64,10 @@ const Form = () => {
 					/>
 				</label>
 				<label
-					className="h-2/10 w-full flex flex-col p-2 hover:bg-gray-300"
+					className="h-2/10 w-full flex flex-col p-2 transition-all rounded-2xl hover:bg-gray-50"
 					htmlFor="password"
 				>
-					<span className="text-green-800">Password</span>
+					<span className="text-lg text-black font-semibold">Password</span>
 					<input
 						className="w-full h-full px-1 border-b-1 outline-none"
 						id="password"
@@ -77,14 +77,20 @@ const Form = () => {
 					/>
 				</label>
 			</main>
-			<footer className="h-1/5 w-full flex justify-center items-center p-4 hover:bg-green-900">
+			<footer className="h-1/5 w-full flex flex-col justify-around items-center p-4">
 				<button
-					className="bg-blue-400 text-white font-bold h-10 w-32 rounded-xl outline-none hover:cursor-pointer"
+					className="bg-purple-700 text-white font-bold h-2/5 w-1/2 rounded-xl outline-none transition-all hover:cursor-pointer hover:bg-purple-800"
 					type="button"
 					onClick={handleSubmit}
 				>
 					SEND
 				</button>
+				<Link
+					className="text-md hover:underline"
+					to={{ pathname: '/recover-password' }}
+				>
+					Recover password
+				</Link>
 			</footer>
 		</form>
 	);

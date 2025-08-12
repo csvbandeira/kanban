@@ -9,21 +9,21 @@ export const create = async (req: Request, res: Response) => {
 
 		if (!name) {
 			return res.status(400).json({
-				message: 'Failed to create user! Check values sent',
+				message: 'Failed! Body is empty',
 			});
 		}
 
-		const user = db.getRepository(User).create({ name });
+		const user = db.getRepository(User).create({ name: name.toUpperCase() });
 		await db.getRepository(User).save(user);
 
 		return res.status(201).json({
-			message: 'User has been created successfully!',
+			message: 'Success! User created',
 			user,
 		});
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: 'Failed to create user! Check console for details',
+			message: 'Failed! Check console for details',
 		});
 	}
 };
@@ -35,25 +35,25 @@ export const update = async (req: Request, res: Response) => {
 
 		if (!id) {
 			return res.status(400).json({
-				message: 'Failed to edit user! Check parameters sent',
+				message: 'Failed! ID is empty',
 			});
 		}
 
 		if (!name) {
 			return res.status(400).json({
-				message: 'Failed to edit user! Check values sent',
+				message: 'Failed! Body is empty',
 			});
 		}
 
-		await db.getRepository(User).update(Number(id), { name: name });
+		await db
+			.getRepository(User)
+			.update(Number(id), { name: name.toUpperCase() });
 
-		return res
-			.status(204)
-			.json({ message: 'User has been edited succesfully!' });
+		return res.status(204).json({ message: 'Success! User updated' });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: 'Failed to edit user! Check console for details',
+			message: 'Failed! Check console for details',
 		});
 	}
 };
@@ -64,19 +64,17 @@ export const exclude = async (req: Request, res: Response) => {
 
 		if (!id) {
 			return res.status(400).json({
-				message: 'Failed to delete user! Check parameters sent',
+				message: 'Failed! ID is empty',
 			});
 		}
 
 		await db.getRepository(User).delete(Number(id));
 
-		return res
-			.status(204)
-			.json({ message: 'User has been deleted successfully!' });
+		return res.status(204).json({ message: 'Success! User excluded' });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: 'Failed to delete user! Check console for details',
+			message: 'Failed! Check console for details',
 		});
 	}
 };
@@ -92,23 +90,23 @@ export const authentication = async (req: Request, res: Response) => {
 
 		if (!name)
 			return res.status(400).json({
-				message: 'Can not match user! Check parameters sent',
+				message: 'Failed! Request body is empty',
 			});
 
 		const searchUser = await db.getRepository(User).findBy({ name: name });
 
 		if (searchUser.length > 0)
 			return res.status(200).json({
-				message: 'User has been founded!',
+				message: 'Success! User matches with parameters',
 			});
 
 		return res.status(404).json({
-			message: 'User has not been founded!',
+			message: 'Failed! No users matches with parameters',
 		});
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: 'Failed to match user! Check console for details',
+			message: 'Failed! Check console for details',
 		});
 	}
 };
