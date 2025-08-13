@@ -1,9 +1,9 @@
-import { DataSource } from "typeorm";
+import { DataSource } from 'typeorm';
 
-import User from "../entities/User";
+import User from '../entities/User';
 
 const databaseConfig = new DataSource({
-	type: "mysql",
+	type: 'mysql',
 	host: process.env.DB_HOST,
 	database: process.env.DB_DATABASE,
 	port: Number(process.env.DB_PORT),
@@ -12,13 +12,14 @@ const databaseConfig = new DataSource({
 	entities: [User],
 	logging: true,
 	synchronize: true,
+	timezone: '-03:00',
 });
 
 const initializeConnection = async () => {
 	try {
 		if (!databaseConfig.isInitialized) await databaseConfig.initialize();
 	} catch (err) {
-		console.error("Database connection failed! ", err);
+		console.error('Database connection failed!', err);
 	}
 };
 
