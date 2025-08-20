@@ -13,7 +13,9 @@ export const create = async (req: Request, res: Response) => {
 			});
 		}
 
-		const user = db.getRepository(User).create({ name: name.toUpperCase() });
+		const user = db
+			.getRepository(User)
+			.create({ name: name.toUpperCase(), isActive: true });
 		await db.getRepository(User).save(user);
 
 		return res.status(201).json({
@@ -86,7 +88,7 @@ export const list = async (_req: Request, res: Response) => {
 
 export const authentication = async (req: Request, res: Response) => {
 	try {
-		const { name, password } = req.body;
+		const { name } = req.body;
 
 		if (!name)
 			return res.status(400).json({

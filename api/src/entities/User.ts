@@ -19,7 +19,7 @@ class User {
 	@Column({ nullable: false })
 	name!: string;
 
-	@Column()
+	@Column({ nullable: false })
 	isActive!: boolean;
 
 	@CreateDateColumn({ type: 'timestamp' })
