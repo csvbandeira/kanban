@@ -1,8 +1,6 @@
 import Form from '../components/Form';
 
-type LoginProps = {};
-
-const Login = ({}: LoginProps) => {
+const Login = () => {
 	return (
 		<div className="h-screen w-full flex justify-center items-center">
 			<div className="h-full w-1/2 bg-purple-700"></div>
