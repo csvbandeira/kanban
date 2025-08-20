@@ -1,6 +1,9 @@
 import { DataSource } from 'typeorm';
 
 import User from '../entities/User';
+import Issue from '../entities/Issue';
+import IssueStatus from '../entities/IssueStatus';
+import Project from '../entities/Project';
 
 const databaseConfig = new DataSource({
 	type: 'mysql',
@@ -9,7 +12,7 @@ const databaseConfig = new DataSource({
 	port: Number(process.env.DB_PORT),
 	username: process.env.DB_USERNAME,
 	password: process.env.DB_PASSWORD,
-	entities: [User],
+	entities: [User, Project, Issue, IssueStatus],
 	logging: true,
 	synchronize: true,
 	timezone: '-03:00',
