@@ -40,7 +40,7 @@ const Form = () => {
 				console.error(err);
 			}
 		} finally {
-			if (formRef.current) return formRef.current.reset();
+			if (formRef.current) formRef.current.reset();
 		}
 	};
 
