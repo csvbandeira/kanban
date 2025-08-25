@@ -45,6 +45,22 @@ class Issue {
 	})
 	@JoinTable()
 	status!: IssueStatus;
+
+	constructor(
+		title: string,
+		description: string = '',
+		createdBy: number,
+		project: Project,
+		assignees: User[],
+		status: IssueStatus,
+	) {
+		this.title = title;
+		this.description = description;
+		this.createdBy = createdBy;
+		this.project = project;
+		this.assignees = assignees;
+		this.status = status;
+	}
 }
 
 export default Issue;

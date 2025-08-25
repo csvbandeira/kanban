@@ -7,25 +7,25 @@ export const create = async (req: Request, res: Response) => {
 	try {
 		const { name } = req.body;
 
-		if (!name) {
+		if (!name)
 			return res.status(400).json({
-				message: 'Failed! Body is empty',
+				message: 'Content error! name is empty',
 			});
-		}
 
-		const user = db
-			.getRepository(User)
-			.create({ name: name.toUpperCase(), isActive: true });
+		const newUser = new User(name.toUpperCase(), true, [], []);
+
+		const user = db.getRepository(User).create(newUser);
+
 		await db.getRepository(User).save(user);
 
 		return res.status(201).json({
-			message: 'Success! User created',
+			message: 'Success! User has been created',
 			user,
 		});
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: 'Failed! Check console for details',
+			message: 'Request error! Check console for details',
 		});
 	}
 };
@@ -33,25 +33,31 @@ export const create = async (req: Request, res: Response) => {
 export const update = async (req: Request, res: Response) => {
 	try {
 		const { id } = req.params;
-		const { name } = req.body;
 
-		if (!id) {
+		console.log(req.body);
+
+		if (!id)
 			return res.status(400).json({
-				message: 'Failed! ID is empty',
+				message: 'Content error! id is empty',
 			});
+
+		for (let value in req.body) {
+			if (typeof value === 'string') {
+				if (req.body[value] === null || req.body[value].trim().length === 0)
+					return res
+						.status(400)
+						.json({ message: `Content error! ${value} is empty` });
+			}
+
+			if (value === 'isActive' && typeof req.body[value] !== 'boolean')
+				return res
+					.status(400)
+					.json({ message: `Type error! ${value} must be a boolean` });
 		}
 
-		if (!name) {
-			return res.status(400).json({
-				message: 'Failed! Body is empty',
-			});
-		}
+		await db.getRepository(User).update(Number(id), req.body);
 
-		await db
-			.getRepository(User)
-			.update(Number(id), { name: name.toUpperCase() });
-
-		return res.status(204).json({ message: 'Success! User updated' });
+		return res.status(204).json({ message: 'Success! User has been updated' });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
@@ -66,24 +72,34 @@ export const exclude = async (req: Request, res: Response) => {
 
 		if (!id) {
 			return res.status(400).json({
-				message: 'Failed! ID is empty',
+				message: 'Content error! id is empty',
 			});
 		}
 
 		await db.getRepository(User).delete(Number(id));
 
-		return res.status(204).json({ message: 'Success! User excluded' });
+		return res.status(204).json({ message: 'Success! User has been excluded' });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({
-			message: 'Failed! Check console for details',
+			message: 'Request error! Check console for details',
 		});
 	}
 };
 
 export const list = async (_req: Request, res: Response) => {
-	const users = await db.getRepository(User).find();
-	return res.status(200).json(users);
+	try {
+		const users = await db.getRepository(User).find();
+
+		return res
+			.status(200)
+			.json({ message: 'Success! Users have been found', users });
+	} catch (err) {
+		console.error(err);
+		return res.status(400).json({
+			message: 'Request error! Check console for details',
+		});
+	}
 };
 
 export const authentication = async (req: Request, res: Response) => {
@@ -95,7 +111,9 @@ export const authentication = async (req: Request, res: Response) => {
 				message: 'Failed! Request body is empty',
 			});
 
-		const searchUser = await db.getRepository(User).findBy({ name: name });
+		const searchUser = await db
+			.getRepository(User)
+			.findBy({ name: name.toUpperCase() });
 
 		if (searchUser.length > 0)
 			return res.status(200).json({

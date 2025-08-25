@@ -12,6 +12,10 @@ class IssueStatus {
 
 	@OneToMany(() => Issue, (issue) => issue.status, { lazy: true })
 	issues!: Issue[];
+
+	constructor(name: string, issues: Issue[]) {
+		((this.name = name), (this.issues = issues));
+	}
 }
 
 export default IssueStatus;

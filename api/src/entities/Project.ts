@@ -18,7 +18,7 @@ class Project {
 	id!: number;
 
 	@Column({ nullable: false })
-	name!: string;
+	title!: string;
 
 	@Column()
 	description!: string;
@@ -41,6 +41,22 @@ class Project {
 
 	@OneToMany(() => Issue, (issue) => issue.project, { lazy: true })
 	issues!: Issue[];
+
+	constructor(
+		title: string,
+		description: string = '',
+		createdBy: number,
+		isActive: boolean,
+		members: User[],
+		issues: Issue[],
+	) {
+		((this.title = title),
+			(this.description = description),
+			(this.createdBy = createdBy),
+			(this.isActive = isActive),
+			(this.members = members),
+			(this.issues = issues));
+	}
 }
 
 export default Project;

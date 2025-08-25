@@ -35,6 +35,18 @@ class User {
 	@ManyToMany(() => Issue, { lazy: true })
 	@JoinTable()
 	mencioned!: Issue[];
+
+	constructor(
+		name: string,
+		isActive: boolean,
+		projects: Project[],
+		mencioned: Issue[],
+	) {
+		((this.name = name),
+			(this.isActive = isActive),
+			(this.projects = projects),
+			(this.mencioned = mencioned));
+	}
 }
 
 export default User;
