@@ -16,10 +16,10 @@ class User {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
-	@Column({ nullable: false })
+	@Column({ nullable: false, type: 'varchar' })
 	name!: string;
 
-	@Column({ nullable: false })
+	@Column({ nullable: false, type: 'bool' })
 	isActive!: boolean;
 
 	@CreateDateColumn({ type: 'timestamp' })
@@ -28,11 +28,11 @@ class User {
 	@UpdateDateColumn({ type: 'timestamp' })
 	updatedAt!: Date;
 
-	@ManyToMany(() => Project, { lazy: true })
+	@ManyToMany(() => Project)
 	@JoinTable()
 	projects!: Project[];
 
-	@ManyToMany(() => Issue, { lazy: true })
+	@ManyToMany(() => Issue)
 	@JoinTable()
 	mencioned!: Issue[];
 

@@ -18,10 +18,10 @@ class Issue {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
-	@Column({ nullable: false })
+	@Column({ nullable: false, type: 'varchar' })
 	title!: string;
 
-	@Column()
+	@Column({ type: 'varchar' })
 	description!: string;
 
 	@CreateDateColumn({ type: 'timestamp' })
@@ -30,19 +30,17 @@ class Issue {
 	@UpdateDateColumn({ type: 'timestamp' })
 	updatedAt!: Date;
 
-	@Column({ nullable: false })
+	@Column({ nullable: false, type: 'int' })
 	createdBy!: number;
 
-	@ManyToOne(() => Project, (project) => project.issues, { lazy: true })
+	@ManyToOne(() => Project, (project) => project.issues)
 	project!: Project;
 
-	@ManyToMany(() => User, { lazy: true })
+	@ManyToMany(() => User)
 	@JoinTable()
 	assignees!: User[];
 
-	@ManyToOne(() => IssueStatus, (issueStatus) => issueStatus.issues, {
-		lazy: true,
-	})
+	@ManyToOne(() => IssueStatus, (issueStatus) => issueStatus.issues)
 	@JoinTable()
 	status!: IssueStatus;
 

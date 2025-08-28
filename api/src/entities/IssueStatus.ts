@@ -7,10 +7,10 @@ class IssueStatus {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
-	@Column({ nullable: false })
+	@Column({ nullable: false, type: 'varchar' })
 	name!: string;
 
-	@OneToMany(() => Issue, (issue) => issue.status, { lazy: true })
+	@OneToMany(() => Issue, (issue) => issue.status)
 	issues!: Issue[];
 
 	constructor(name: string, issues: Issue[]) {

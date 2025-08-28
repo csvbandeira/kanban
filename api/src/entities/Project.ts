@@ -17,16 +17,16 @@ class Project {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
-	@Column({ nullable: false })
+	@Column({ nullable: false, type: 'varchar' })
 	title!: string;
 
-	@Column()
+	@Column({ type: 'varchar' })
 	description!: string;
 
 	@Column({ nullable: false })
 	createdBy!: number;
 
-	@Column({ nullable: false })
+	@Column({ nullable: false, type: 'boolean' })
 	isActive!: boolean;
 
 	@CreateDateColumn({ type: 'timestamp' })
@@ -35,11 +35,11 @@ class Project {
 	@UpdateDateColumn({ type: 'timestamp' })
 	updatedAt!: Date;
 
-	@ManyToMany(() => User, { lazy: true })
+	@ManyToMany(() => User)
 	@JoinTable()
 	members!: User[];
 
-	@OneToMany(() => Issue, (issue) => issue.project, { lazy: true })
+	@OneToMany(() => Issue, (issue) => issue.project)
 	issues!: Issue[];
 
 	constructor(
