@@ -8,8 +8,7 @@ import {
 	JoinTable,
 } from 'typeorm';
 
-import Project from './Project';
-import Issue from './Issue';
+import { Project, Issue } from '.';
 
 @Entity()
 class User {

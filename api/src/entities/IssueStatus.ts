@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import Issue from './Issue';
+import { Issue } from '.';
 
 @Entity()
 class IssueStatus {

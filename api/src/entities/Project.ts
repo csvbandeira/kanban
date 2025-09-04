@@ -9,8 +9,7 @@ import {
 	UpdateDateColumn,
 } from 'typeorm';
 
-import User from './User';
-import Issue from './Issue';
+import { User, Issue } from '.';
 
 @Entity()
 class Project {
