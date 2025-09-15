@@ -34,7 +34,7 @@ class Project {
 	@UpdateDateColumn({ type: 'timestamp' })
 	updatedAt!: Date;
 
-	@ManyToMany(() => User)
+	@ManyToMany(() => User, { cascade: true })
 	@JoinTable()
 	members!: User[];
 

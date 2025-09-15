@@ -27,11 +27,11 @@ class User {
 	@UpdateDateColumn({ type: 'timestamp' })
 	updatedAt!: Date;
 
-	@ManyToMany(() => Project)
+	@ManyToMany(() => Project, { cascade: true, eager: true })
 	@JoinTable()
 	projects!: Project[];
 
-	@ManyToMany(() => Issue)
+	@ManyToMany(() => Issue, { cascade: true })
 	@JoinTable()
 	mencioned!: Issue[];
 

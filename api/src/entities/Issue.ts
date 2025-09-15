@@ -34,7 +34,7 @@ class Issue {
 	@ManyToOne(() => Project, (project) => project.issues)
 	project!: Project;
 
-	@ManyToMany(() => User)
+	@ManyToMany(() => User, { cascade: true })
 	@JoinTable()
 	assignees!: User[];
 
